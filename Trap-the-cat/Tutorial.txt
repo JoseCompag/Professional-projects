@@ -1,0 +1,9 @@
+Pasos a seguir para jugar:
+1. Ejecute la App.
+2. Seleccione el modo de juego.
+3. En caso de Player VS Cat, solo debera ingresar, aquella posicion donde quiera bloquear.
+
+Representacion utilizada:
+001 Hexagono libre.
+--- Hexagono bloqueado.
+CAR Hexagono ocupado por el gato.
