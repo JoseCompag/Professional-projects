@@ -1,2 +1,2 @@
 # Professional-projects
-Portafolio profesional de desarrollo de software: proyectos, arquitecturas y soluciones de código.
+Professional software development portfolio: projects, architecture, and code solutions.
