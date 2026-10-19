@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System name="PatternIndex">
+  <Parameters>
+    <Parameter id="1" name="c2_validez_pattern" type="1">
+      <values>
+        <value>pattern=null</value>
+        <value>#pattern&gt;=1</value>
+        <value>#pattern=0</value>
+      </values>
+      <basechoices />
+      <invalidValues />
+    </Parameter>
+    <Parameter id="2" name="c1_validez_subject" type="1">
+      <values>
+        <value>subject=null</value>
+        <value>#subject=0</value>
+        <value>#subject&gt;=1</value>
+      </values>
+      <basechoices />
+      <invalidValues />
+    </Parameter>
+    <Parameter id="3" name="c3_longitud_pattern" type="1">
+      <values>
+        <value>#pattern&gt;#subject</value>
+        <value>#pattern=#subject</value>
+        <value>#pattern&lt;#subject</value>
+      </values>
+      <basechoices />
+      <invalidValues />
+    </Parameter>
+    <Parameter id="4" name="c4_relacion_subject_pattern" type="1">
+      <values>
+        <value>iguales</value>
+        <value>pattern_no_aparece</value>
+        <value>pattern_aparece</value>
+      </values>
+      <basechoices />
+      <invalidValues />
+    </Parameter>
+  </Parameters>
+  <OutputParameters />
+  <Relations />
+  <Constraints />
+  <Testset doi="2">
+    <Testcase TCNo="0">
+      <Value>1</Value>
+      <Value>pattern=null</Value>
+      <Value>subject=null</Value>
+      <Value>#pattern=#subject</Value>
+      <Value>pattern_no_aparece</Value>
+    </Testcase>
+    <Testcase TCNo="1">
+      <Value>2</Value>
+      <Value>pattern=null</Value>
+      <Value>#subject=0</Value>
+      <Value>#pattern&lt;#subject</Value>
+      <Value>pattern_aparece</Value>
+    </Testcase>
+    <Testcase TCNo="2">
+      <Value>3</Value>
+      <Value>pattern=null</Value>
+      <Value>#subject&gt;=1</Value>
+      <Value>#pattern&gt;#subject</Value>
+      <Value>iguales</Value>
+    </Testcase>
+    <Testcase TCNo="3">
+      <Value>4</Value>
+      <Value>#pattern&gt;=1</Value>
+      <Value>subject=null</Value>
+      <Value>#pattern&lt;#subject</Value>
+      <Value>iguales</Value>
+    </Testcase>
+    <Testcase TCNo="4">
+      <Value>5</Value>
+      <Value>#pattern&gt;=1</Value>
+      <Value>#subject=0</Value>
+      <Value>#pattern&gt;#subject</Value>
+      <Value>pattern_no_aparece</Value>
+    </Testcase>
+    <Testcase TCNo="5">
+      <Value>6</Value>
+      <Value>#pattern&gt;=1</Value>
+      <Value>#subject&gt;=1</Value>
+      <Value>#pattern=#subject</Value>
+      <Value>pattern_aparece</Value>
+    </Testcase>
+    <Testcase TCNo="6">
+      <Value>7</Value>
+      <Value>#pattern=0</Value>
+      <Value>subject=null</Value>
+      <Value>#pattern&gt;#subject</Value>
+      <Value>pattern_aparece</Value>
+    </Testcase>
+    <Testcase TCNo="7">
+      <Value>8</Value>
+      <Value>#pattern=0</Value>
+      <Value>#subject=0</Value>
+      <Value>#pattern=#subject</Value>
+      <Value>iguales</Value>
+    </Testcase>
+    <Testcase TCNo="8">
+      <Value>9</Value>
+      <Value>#pattern=0</Value>
+      <Value>#subject&gt;=1</Value>
+      <Value>#pattern&lt;#subject</Value>
+      <Value>pattern_no_aparece</Value>
+    </Testcase>
+  </Testset>
+  <Header>
+    <Value />
+    <Value>c2_validez_pattern</Value>
+    <Value>c1_validez_subject</Value>
+    <Value>c3_longitud_pattern</Value>
+    <Value>c4_relacion_subject_pattern</Value>
+  </Header>
+  <Stat-Data>
+    <ExecutionTime>0.024</ExecutionTime>
+    <MaxDomainSize>3</MaxDomainSize>
+    <MinDomainSize>3</MinDomainSize>
+    <TotalNoOfCombination>54</TotalNoOfCombination>
+    <TotalNoOfTests>9</TotalNoOfTests>
+    <Algorithm>IPOG</Algorithm>
+  </Stat-Data>
+</System>
+

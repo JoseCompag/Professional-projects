@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System name="SYSTEM-Interseccion">
+  <Parameters>
+    <Parameter id="0" name="c1_validez_de_set1" type="1">
+      <values>
+        <value>set1=null</value>
+        <value>set1={}</value>
+        <value>#set1&gt;=1</value>
+      </values>
+      <basechoices>
+        <basechoice>#set1&gt;=1</basechoice>
+      </basechoices>
+      <invalidValues />
+    </Parameter>
+    <Parameter id="1" name="c2_validez_de_set2" type="1">
+      <values>
+        <value>set2=null</value>
+        <value>set2={}</value>
+        <value>#set2&gt;=1</value>
+      </values>
+      <basechoices>
+        <basechoice>#set2&gt;=1</basechoice>
+      </basechoices>
+      <invalidValues />
+    </Parameter>
+    <Parameter id="2" name="relation_set_1_set_2" type="1">
+      <values>
+        <value>set1_subconjunto_set2</value>
+        <value>set2_subconjunto_set1</value>
+        <value>mismo_conjunto</value>
+        <value>no_elementos_en_comun</value>
+        <value>elementos_en_comun</value>
+        <value>alguno_null</value>
+      </values>
+      <basechoices>
+        <basechoice>elementos_en_comun</basechoice>
+      </basechoices>
+      <invalidValues />
+    </Parameter>
+  </Parameters>
+  <OutputParameters />
+  <Relations />
+  <Constraints />
+  <Testset doi="1">
+    <Testcase TCNo="0">
+      <Value>1</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="1">
+      <Value>2</Value>
+      <Value>set1=null</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="2">
+      <Value>3</Value>
+      <Value>set1={}</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="3">
+      <Value>4</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>set2=null</Value>
+      <Value>elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="4">
+      <Value>5</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>set2={}</Value>
+      <Value>elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="5">
+      <Value>6</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>set1_subconjunto_set2</Value>
+    </Testcase>
+    <Testcase TCNo="6">
+      <Value>7</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>set2_subconjunto_set1</Value>
+    </Testcase>
+    <Testcase TCNo="7">
+      <Value>8</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>mismo_conjunto</Value>
+    </Testcase>
+    <Testcase TCNo="8">
+      <Value>9</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>no_elementos_en_comun</Value>
+    </Testcase>
+    <Testcase TCNo="9">
+      <Value>10</Value>
+      <Value>#set1&gt;=1</Value>
+      <Value>#set2&gt;=1</Value>
+      <Value>alguno_null</Value>
+    </Testcase>
+  </Testset>
+  <Header>
+    <Value />
+    <Value>c1_validez_de_set1</Value>
+    <Value>c2_validez_de_set2</Value>
+    <Value>relation_set_1_set_2</Value>
+  </Header>
+  <Stat-Data>
+    <ExecutionTime>0.0</ExecutionTime>
+    <MaxDomainSize>6</MaxDomainSize>
+    <MinDomainSize>3</MinDomainSize>
+    <TotalNoOfCombination>12</TotalNoOfCombination>
+    <TotalNoOfTests>10</TotalNoOfTests>
+    <Algorithm>BaseChoice</Algorithm>
+  </Stat-Data>
+</System>
+

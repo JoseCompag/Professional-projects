@@ -1,0 +1,231 @@
+-- Ejercicio 2:
+Un defecto (fault) es un concepto estático, refiere a la/las lineas de código que contienen un error. Es un defecto
+estático en el software.
+Una falla es un concepto dinámico, refiere a un comportamiento incorrecto externo con respecto a los requerimientos o alguna otra descripción del comportamiento esperado.
+
+// ACLARACION: dejamos la clase SimpleRoutines con todos los bugs, y añadimos una clase nueva (SimpleFixedRoutines)
+donde se implementan los métodos con los bugs solucionados.
+
+//Corrección: Bien
+
+-- Ejercicio 3:
+Programa 1:
+a)
+    El defecto se encuentra en la condición de continuación del ciclo, en donde nunca se alcanza la posición 0 del arreglo.
+    Modificación presentada en el archivo SimpleRoutines.java
+b)  Test que no ejecute el defecto:
+        No es posible realizar un test en este caso debido a que el Program Counter (PC) siempre alcanza la condición defectuosa de i > 0.
+        Esto se debe a que lo primero que ejecuta el programa es el ciclo for, el cual define la variable i y verifica la condición de continuación.
+c)  Test que ejecute el defecto y no resulte en una falla:
+        @Test
+        public void test_findLastWithElementPresent() {
+            int[] array = {2, 3, 5};
+
+            int result = SimpleRoutines.findLast(array, 3);
+
+            assertEquals(1, result, "Array doesn't contain the searched element");
+        }
+d)  Test que ejecute el defecto y que produzca una falla:
+        @Test
+        public void test_findLastWithFirstElement() {
+            int[] array = {2, 3, 5};
+
+            int result = SimpleRoutines.findLast(array, 2);
+
+            assertEquals(0, result, "Array doesn't contain the searched element");
+        }
+
+//Corrección: Bien
+
+Progama 2:
+a) El defecto se encuentra en que al primer cero que se encuentra en el arreglo, retorna su índice, en vez de retornar el último encontrado.
+Modificación presentada en el archivo SimpleRoutines.java
+b)  Test que no ejecute el defecto:
+@Test
+    public void test_lastZeroWithEmptyArray() {
+        int[] array = {};
+
+        int result = SimpleRoutines.lastZero(array);
+
+        assertEquals(-1, result, "Array is empty therefore it contains no zeros, -1 is expected.");
+    }
+c)  Test que ejecute el defecto y no resulte en una falla:
+@Test
+    public void test_lastZeroWithLastElementAsZero() {
+        int[] array = {1, 2, 0};
+
+        int result = SimpleRoutines.lastZero(array);
+
+        assertEquals(2, result, "Last element is a zero, should return index 2.");
+    }
+d)  Test que ejecute el defecto y que produzca una falla:
+@Test
+    public void test_LastZeroWithFirstElementAsZero() {
+        int[] array = {0, 1, 0};
+
+        int result = SimpleRoutines.lastZero(array);
+
+        assertEquals(2, result, "First and last elements are a zero, expected index is not returned.");
+    }
+//Corrección: Bien
+
+
+Programa 3:
+a) El defecto se encuentra en la condición dentro del for loop, en donde se chequea que cada elemento del código sea mayor o igual a cero. Este deberia chequear que sean mayores a cero.
+b)  Test que no ejecute el defecto:
+@Test
+    public void test_countPositiveWithEmptyArray() {
+        int[] array = {};
+
+        int result = SimpleRoutines.countPositive(array);
+
+        assertEquals(0, result, "Array is empty therefore it contains no positive numbers, 0 is expected.");
+    }
+c)  Test que ejecute el defecto y no resulte en una falla:
+@Test
+    public void test_countPositiveWithAllPositiveNumbers() {
+        int[] array = {1, 2, 3, 4};
+
+        int result = SimpleRoutines.countPositive(array);
+
+        assertEquals(4, result, "Array contains 4 positive numbers, 4 is expected.");
+    }
+
+d)  Test que ejecute el defecto y que produzca una falla:
+@Test
+    public void test_countPositive_withFourPositiveNumbers() {
+        int[] array = {1, 2, 3, 4, 0};
+
+        int result = SimpleRoutines.countPositive(array);
+
+        assertEquals(4, result, "Expected the count of positive numbers to be 4, but it was not.");
+    }
+
+//Corrección: Bien
+
+Programa 4: 
+a) El defecto se encuentra en el chequeo de los números impares, el resultado de la operación % no será igual a 1.
+b)  Test que no ejecute el defecto:
+@Test
+    public void test_OddOrPosWithEmptyArray() {
+        int[] array = {};
+
+        int result = SimpleRoutines.oddOrPos(array);
+
+        assertEquals(0, result, "Array is empty, amount of odd and positive numbers should be 0.");
+    }
+c)  Test que ejecute el defecto y no resulte en una falla:
+@Test
+    public void test_OddOrPosWithArrayOfPositives() {
+        int[] array = {2,3,4,5};
+
+        int result = SimpleRoutines.oddOrPos(array);
+
+        assertEquals(4, result, "All numbers are positives, 4 is expected.");
+    }
+d)  Test que ejecute el defecto y que produzca una falla:
+@Test
+    public void test_OddOrPosWithArrayOfPositivesAndNegatives() {
+        int[] array = {-3, -2, 0, 1, 4};
+
+        int result = SimpleRoutines.oddOrPos(array);
+
+        assertEquals(3, result, "The count of positive and odd numbers should be 3.");
+    }
+
+//Corrección: Bien
+
+-- Ejercicio 4:
+Para este ejercicio, se llevaron a cabo tests para los programas que contenian defectos (test/java/practico1_exercises/simple_routines/SimpleRoutinesTest.java), como tambien tests para los que fueron reparados (test/java/practico1_exercises/simple_routines/SimpleFixedRoutinesTest.java).
+
+Programa 1): 
+En este programa, el test que logra ejecutar el defecto y que se produzca una falla es el siguiente:
+    @Test
+    public void test_findLastWithFirstElement() {
+        int[] array = {2, 3, 5};
+
+        int result = SimpleRoutines.findLast(array, 2);
+
+        assertEquals(0, result, "Array doesn't contain the searched element");
+    }
+Encontramos esta falla, observando las cuatro condiciones del modelo RIPR:
+    - Reachability: En este caso el test ejecuta la linea que contiene el defecto, la cual es, "for (int i=x.length-1; i > 0; i--)" 
+    donde la condicion de continuación del ciclo es i > 0, y este es el defecto.
+    - Infection: Este defecto infecta el correcto estado del programa el cual deberia alcanzar un momento en donde la variable i sea igual a 0
+    dando lugar a que el arreglo no pueda ser recorrido por completo.
+    - Propagation: El estado infectado causa que el resultado del método findLast sea incorrecto, ya que no se recorre todo el arreglo.
+    - Revealability: El tester puede observar el fallo en el resultado del test, ya que el método findLast no devuelve el índice correcto del elemento buscado.
+
+Progama 2):
+Test que ejecute el defecto y que produzca una falla:
+    @Test
+    public void test_LastZeroWithFirstElementAsZero() {
+        int[] array = {0, 1, 0};
+
+        int result = SimpleRoutines.lastZero(array);
+
+        assertEquals(2, result, "First and last elements are a zero, expected index is not returned.");
+    }
+Detectamos esta falla, observando las cuatro condiciones del modelo RIPR: 
+    - Reachability: El test ejecuta la línea que contiene el defecto, la cual es "if (x[i] == 0) { return i; }". 
+    - Infection: Este defecto infecta el correcto estado del programa al retornar el índice del primer cero encontrado en lugar del último. 
+    - Propagation: El estado infectado causa que el resultado del método lastZero sea incorrecto, ya que no se recorre todo el arreglo para 
+    encontrar el último cero. 
+    - Revealability: El tester puede observar el fallo en el resultado del test, ya que el método lastZero no devuelve el índice correcto del último cero.
+
+Programa 3): 
+En este programa, el test que logra ejecutar el defecto y que se produzca una falla es el siguiente:
+    @Test
+    public void test_countPositive_withFourPositiveNumbers() {
+        int[] array = {1, 2, 3, 4, 0};
+
+        int result = SimpleRoutines.countPositive(array);
+
+        assertEquals(4, result, "Expected the count of positive numbers to be 4, but it was not.");
+    }
+Para observar esta falla, se dieron 4 condiciones, como se detalla a continuación:
+- Reachability: la porción de código en la que se encuentra el defecto es ejecutada, más específicamente la línea "if (x[i] >= 0)".
+- Infection: una vez que la porción del código defectuosa fue ejecutada, el programa se encontró en un estado incorrecto, en donde se manifestó el defecto. 
+Si se tomara una foto completa del programa, por ejemplo, en la última ejecución del ciclo for, la variable count tendría un valor incorrecto, siendo esta count = 5, 
+cuando en realidad debería ser count = 4.
+- Propagation: el estado infectado es propagado por el resto de la ejecución. Si bien el arreglo se recorre en su totalidad, la variable count arrastra su valor incorrecto 
+hasta el final de la ejecución.
+- Revealability: gracias a este test, se puede observar el resultado incorrecto de la ejecución. El método countPositive no retorna la cantidad correcta de números
+positivos.
+
+
+Programa 4): 
+En este programa, el test que logra ejecutar el defecto y que se produzca una falla es el siguiente:
+    @Test
+    public void test_OddOrPosWithArrayOfPositivesAndNegatives() {
+        int[] array = {-3, -2, 0, 1, 4};
+
+        int result = SimpleRoutines.oddOrPos(array);
+
+        assertEquals(3, result, "The count of positive and odd numbers should be 3.");
+    }
+Para observar esta falla, se tuvieron que dar 4 condiciones, como se detalla a continuación:
+- Reachability: la porción de código en la que se encuentra el defecto es ejecutada, más específicamente la línea "if (x[i]% 2 == 1 || x[i] > 0)".
+- Infection: una vez que la porción del código defectuosa fue ejecutada, el programa se encontró en un estado incorrecto, en donde se manifestó el defecto. 
+Si se tomara una foto completa del programa, por ejemplo, en la primera ejecución del ciclo for, la variable count tendría un valor incorrecto, siendo esta count = 0, 
+cuando en realidad debería ser count = 1.
+- Propagation: el estado infectado es propagado por el resto de la ejecución. Si bien el arreglo se recorre en su totalidad, la variable count arrastra su valor incorrecto 
+hasta el final de la ejecución.
+- Revealability: gracias a este test, se puede observar el resultado incorrecto de la ejecución. El método oddOrPos no retorna la cantidad correcta de números
+positivos o primos.
+
+
+//Corrección: Bien
+
+-- Ejercicio 5:
+El problema en el código dado es que el metodo equals en ColorPoint no maneja correctamente las comparaciones
+con instancias de Point, lo cual puede causar inconsistencias. Además, el metodo equals debe implementar una relación
+de equivalencia, lo cual significa que debe cumplir con las propiedades de reflexividad, simetría y transitividad.
+También debe ser consistente y, para cualquier valor de referencia x que no sea nulo, x.equals(null) debe devolver false.
+
+Modificamos el código para que cumpla con casi todas las propiedades mencionadas anteriormente, pero sacrificamos
+la propiedad de transitividad ya que creíamos que era la más adecuada para el problema dado.
+
+Ademas, se añadieron en la clase PointTests los tests solicitados para la actividad.
+
+//Corrección: Bien

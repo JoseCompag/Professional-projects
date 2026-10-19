@@ -1,0 +1,56 @@
+-- EJERCICIO 3 (INTERSECCION)
+a) ¿La partición para C1 (Idem. C2) satisface la propiedad de completitud?
+    La partición cubre todos los posibles estados de set1 (y de set2), ya que estos pueden ser null, {} (vacío), o
+    tener al menos un elemento. Esto significa que la propiedad de completitud se cumple.
+    Por lo tanto, al realizar la union de cada uno de los bloques, C1 (y tambien C2) SI satisface la propiedad de
+    completitud.
+b) ¿La partición para C1 (idem. C2) satisface la propiedad de no solapamiento?
+    Si, las particiones satisfacen la propiedad de disjointness. Ya que es disjunta, porque que null, {} y un
+    conjunto con al menos un elemento son mutuamente excluyentes. No existe superposición entre estas categorías,
+    lo que garantiza que no se solapan.
+c) ¿La partición para C3 satisface la propiedad de completitud?
+    No. Teniendo en cuenta que algunos conjuntos tienen elementos en común, pero aun así
+    no satisfacen ninguna relación de subconjunto. Ejemplo: s1 = {1, 2}; s2 = {1, 3}.
+d) ¿La partición para C3 satisface la propiedad de disjointness?
+    No. Considerando s1 y s2 = el mismo conjunto, como {1, 2}. Se satisfacen los predicados para
+    cada uno de los primeros tres bloques, pero no para el cuarto.
+e) Revise las características para eliminar cualquier problema que encuentre.
+    Para resolver los problemas en C3, podemos agregar un bloque adicional que represente la relación de los conjuntos
+    que tienen algunos elementos en común, pero no son subconjuntos ni iguales.
+    Este nuevo bloque resolvería los problemas tanto de completitud como de disjointness.
+f) Provea los requisitos de test para satisfacer cobertura de bloques bases (definir bloque base para cada partición).
+    C1 y C2, tres bloques (null, conjunto vacío, conjunto con al menos un elemento).
+    Para C3, bloques:
+        - Que representen el mismo conjunto.
+        - s1 subconjunto de s2.
+        - s2 subconjunto de s1.
+        - Elementos en comun (sin ser iguales, ni uno subconjunto del otro).
+        - Alguno de los dos conjuntos con valor null.
+        - Conjuntos que no tienen elementos en comun.
+    (DESARROLLO DE CÓDIGO EN SUS RESPECTIVOS ARCHIVOS)
+MDE Redefinido:
+    | ID  | Características              | b1          | b2          | b3            | b4        | b5            | b6        |
+    |-----|----------------------------  |-------------|-----------  |-----------    |-------    |-------        |-------    |
+    | C1  | Validez de set1              | set1=null   | set1={}     | #set1>=1      |           |               |           |
+    | C2  | Validez de set2              | set2=null   | set2={}     | #set2>=1      |           |               |           |
+    | C3  | Relación entre set1 y set2   | set1 y set2 | set1 es     | set2 es       | set1 y    | set1 y set2   | alguno    |
+    |     |                              | representan | un          | un            | set2      | tienen        | de los    |
+    |     |                              | el mismo    | subconjunto | subconjunto   | no        | elementos en  | dos       |
+    |     |                              | conjunto    | de set2     | de set1       | tienen    | comun pero    | conjuntos |
+    |     |                              |             |             |               | elems en  | no son        | es null   |
+    |     |                              |             |             |               | común     | iguales, ni   |           |
+    |     |                              |             |             |               |           | uno es        |           |
+    |     |                              |             |             |               |           | subconj. del  |           |
+    |     |                              |             |             |               |           | otro          |           |
+    |     |                              |             |             |               |           |               |           |
+
+-- EJERCICIO 4 (PatternIndex)
+
+El MDE (IDM) es el siguiente:
+    | ID | Caracteristicas      |   b1               | b2                | b3                   | b4            |
+    | C1 | Validez de subject   | subject=null       | subject=""        | #subject>=1          |               |
+    | C2 | validez de pattern   | pattern=null       | pattern=""        | #pattern>=1          |               |
+    | C3 | relacion de longit.  | #pattern>#subject  | #pattern=#subject | #pattern<#subject    |               |
+    | C4 | relacion entre       | pattern igual      | pattern no        | pattern aparece      | alguno null   |
+    |    | subject y pattern    |  a subject         | no aparece en     | en subject           |               |
+    |    |                      |                    | subject           |                      |               |
